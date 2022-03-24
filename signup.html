@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            width: 270px;
+            border: 1px solid rgb(230, 230, 230);
+            margin: 3% auto;
+            padding: 3%;
+            background: rgb(180,58,58);
+            background: linear-gradient(90deg, rgba(180,58,58,1) 0%, rgba(0,0,0,1) 50%, rgba(0,34,107,1) 100%); 
+            text-align: center;
+            border-radius: 15px;
+            color: white;
+            }
+            input
+            {
+                width: 220px;
+                height: 30px;
+                margin-bottom: 20px;
+                border-radius: 5px;
+                background-color: white;
+            }
+            form>input:nth-child(5)
+            {
+                width:100px
+            }
+    </style>
+</head>
+<body>
+    <form action="" id="form">
+        <h1>SIGN UP</h1>
+        <input id="email" type="email" placeholder="Enter your email">
+        <input id="number" type="number" placeholder="Enter your mobile number">
+        <input id="password" type="password" placeholder="Enter your password">
+        <input type="submit">
+    </form>
+</body>
+<script>
+    document.querySelector("#form").addEventListener("submit",signupfun);
+    var data=JSON.parse(localStorage.getItem("userdata"))||[];
+    function signupfun()
+    {
+        event.preventDefault();
+        var obj={
+            mail:document.querySelector("#email").value,
+            mobnum:document.querySelector("#number").value,
+            pass:document.querySelector("#password").value
+        }
+        data.push(obj);
+        localStorage.setItem("userdata",JSON.stringify(data));
+    }
+</script>
+</html>
