@@ -28,6 +28,27 @@
             color: white;
             cursor: grab;
         }
+        #container
+        {
+            width: 220px;
+            border-radius: 5px;
+            background: rgb(0, 0, 0);
+            text-align: center;
+            margin: auto;
+            margin-top: 40px;
+            padding: 30px;
+            color: white;
+        }
+        #container>form>input
+        {
+            margin-bottom: 15px;
+            width: 200px;
+            height: 25px;
+        }
+        #container>form>input:nth-child(4)
+        {
+            width: 100px;
+        }
     </style>
 </head>
 <body>
@@ -37,13 +58,16 @@
         <div><a href="signup.html">Sign Up</a></div>
         <div><a href="loginpage.html">Login</a></div>
     </div>
-    <h1>SignUp</h1>
-    <form action="">
-        <input type="email" placeholder="Enter Email" id="email">
-        <input type="password" placeholder="Enter Password" id="password">
-        <input type="name" placeholder="User Name" id="name">
-        <input type="submit">
-    </form>
+    
+    <div id="container">
+        <h1>SignUp</h1>
+        <form action="">
+            <input type="email" placeholder="Enter Email" id="email">
+            <input type="password" placeholder="Enter Password" id="password">
+            <input type="name" placeholder="User Name" id="name">
+            <input type="submit">
+        </form>
+    </div>
 </body>
 <script>
     document.querySelector("form").addEventListener("submit",submitfunction);
