@@ -22,12 +22,22 @@
         {
             color: aqua;
         }
+        #navbar>div>a{
+          color: whitesmoke;
+        }
+        button
+        {
+            font-family: 'Poppins', sans-serif;
+            color: black;
+            cursor: grab;
+        }
         a{
             text-decoration: none;
             font-family: 'Poppins', sans-serif;
-            color: white;
+            color: black;
             cursor: grab;
         }
+    
         #container
         {
             display: grid;
@@ -51,6 +61,7 @@
             margin-top: 20px;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
+        
     </style>
 </head>
 <body>
@@ -60,6 +71,8 @@
         <div><a href="signup.html">Sign Up</a></div>
         <div><a href="loginpage.html">Login</a></div>
     </div>
+    <h1>Womens Page</h1>
+    <button><a href="cart.html">Cart</a></button>
     <div id="container"></div>
 </body>
 <script>
@@ -539,8 +552,18 @@
     pricesec.append(price1,strikedofprice)
     var addtocart=document.createElement("button");
     addtocart.innerText="Add to Cart";
+    addtocart.addEventListener("click", function()
+    {
+       cart(el);
+    })
     innerbox.append(image1,name1,pricesec,addtocart);
    document.querySelector("#container").append(innerbox);
   })
+  function cart(el)
+  {
+    var cart=JSON.parse(localStorage.getItem("cartdata"))||[];
+    cart.push(el);
+    localStorage.setItem("cartdata",JSON.stringify(cart))
+  }
 </script>
 </html>

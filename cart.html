@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    #container
+    {
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        grid-template-rows: auto;
+        gap: 20px;
+    }
+    #innerbox
+        {
+            width: 200px;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>Im Cart</h1>
+    <p id="total"></p>
+    <p id="totalprice"></p>
+    <div id="container"></div>
+</body>
+<script>
+    var data=JSON.parse(localStorage.getItem("cartdata"));
+    console.log(data);
+    var total=data.reduce(function(sum,element,index,arr)
+    {
+        return sum+Number(element.price);
+    },0);
+    var totalitem=data.length;
+    document.querySelector("#totalprice").innerText="Total No of products = "+totalitem;
+    console.log(total);
+    document.querySelector("#total").innerText=`Total Price = ${total}`;
+
+    data.map(function(el,index)
+    {
+    var innerbox =document.createElement("div");
+    innerbox.setAttribute("id","innerbox")
+    var image1=document.createElement("img");
+    image1.src=el.image_url;
+    var name1=document.createElement("p");
+    name1.innerText=el.name;
+    var price1=document.createElement("p");
+    price1.innerText=el.price;
+    var remove=document.createElement("button");
+    remove.innerText="Button"
+    remove.addEventListener("click",function()
+    {
+       removeitem(el,index)
+    })
+    innerbox.append(image1,name1,price1,remove);
+   document.querySelector("#container").append(innerbox);
+    })
+      
+    function removeitem(el,index)
+    {
+      data.splice(index,1);
+      localStorage.setItem("cartdata",JSON.stringify(data));
+      window.location.reload()
+    }
+</script>
+</html>

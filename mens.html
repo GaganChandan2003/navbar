@@ -22,12 +22,17 @@
         {
             color: aqua;
         }
+        #navbar>div>a{
+          color: whitesmoke;
+        }
         a{
             text-decoration: none;
             font-family: 'Poppins', sans-serif;
-            color: white;
+            color: black;
             cursor: grab;
         }
+        
+        
         #container
         {
             display: grid;
@@ -61,6 +66,7 @@
         <div><a href="loginpage.html">Login</a></div>
     </div>
     <h1>Mens Page</h1>
+    <button><a href="cart.html">Cart</a></button>
     <div id="container"></div>
 </body>
 <script>
@@ -70,8 +76,8 @@
       image_url:
         "https://content.shop4reebok.com/static/Product-EX4296/reebok_EX4296_1.jpg.plp",
       name: "MEN'S REEBOK RUNNING ROADMAP SHOES",
-      price: "$1170",
-      strikedoffprice: "$2599",
+      price: 1170,
+      strikedoffprice: 2599,
     },
     {
       image_url:
@@ -320,7 +326,7 @@
     },
   ];
   
-  mensData.map(function(el)
+  mensData.map(function(el,index)
   {
     var innerbox =document.createElement("div");
     innerbox.setAttribute("id","innerbox")
@@ -338,8 +344,19 @@
     pricesec.append(price1,strikedofprice)
     var addtocart=document.createElement("button");
     addtocart.innerText="Add to Cart";
+    addtocart.addEventListener("click", function()
+    {
+       cart(el);
+    })
+  
     innerbox.append(image1,name1,pricesec,addtocart);
    document.querySelector("#container").append(innerbox);
   })
+  function cart(el)
+  {
+    var cart=JSON.parse(localStorage.getItem("cartdata"))||[];
+    cart.push(el);
+    localStorage.setItem("cartdata",JSON.stringify(cart))
+  }
 </script>
 </html>
