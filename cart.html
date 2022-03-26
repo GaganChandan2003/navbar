@@ -6,6 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        #navbar
+        {
+            background: rgb(2,0,36);
+            background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,9,1) 42%, rgba(0,212,255,1) 100%);
+            display: flex;
+            justify-content: space-around;
+            height: 50px;
+            align-items: center;
+        }
+        #navbar>div>:hover
+        {
+            color: aqua;
+        }
+        a{
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            cursor: grab;
+        }
     #container
     {
         display: grid;
@@ -25,22 +44,48 @@
     
 </head>
 <body>
+    <div id="navbar">
+        <div><a href="mens.html">Mens</a></div>
+        <div><a href="womens.html">Womens</a></div>
+        <div><a href="signup.html">Sign Up</a></div>
+        <div><a href="loginpage.html">Login</a></div>
+    </div>
     <h1>Im Cart</h1>
     <p id="total"></p>
     <p id="totalprice"></p>
+    <form action="">
+        <input type="text" id="code">
+        <input type="submit">
+    </form>
     <div id="container"></div>
 </body>
 <script>
     var data=JSON.parse(localStorage.getItem("cartdata"));
-    console.log(data);
+    var code=document.querySelector("form").addEventListener("click",myfunction)
     var total=data.reduce(function(sum,element,index,arr)
-    {
-        return sum+Number(element.price);
-    },0);
+        {
+            return sum+Number(element.price);
+        },0);
+        document.querySelector("#total").innerText="Total price="+" "+total;
+    function myfunction(){
+        event.preventDefault()
+        
+        var code=document.querySelector("#code").value;
+        if(code=="masai30")
+        {
+            var discount=total-((total/100)*30)
+            document.querySelector("#total").innerText="Total price="+" "+Math.floor(discount);
+        }  
+        else{
+            document.querySelector("#total").innerText="Total price="+" "+total;
+        }
+    }
+   
+      
     var totalitem=data.length;
     document.querySelector("#totalprice").innerText="Total No of products = "+totalitem;
-    console.log(total);
-    document.querySelector("#total").innerText=`Total Price = ${total}`;
+    
+    
 
     data.map(function(el,index)
     {
@@ -53,7 +98,7 @@
     var price1=document.createElement("p");
     price1.innerText=el.price;
     var remove=document.createElement("button");
-    remove.innerText="Button"
+    remove.innerText="Remove item"
     remove.addEventListener("click",function()
     {
        removeitem(el,index)
