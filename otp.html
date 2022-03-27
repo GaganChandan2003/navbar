@@ -22,38 +22,32 @@
             width: 200px;
             height: 25px;}
            
-            #container>form>input:nth-child(5)
+            #container>form>input:nth-child(2)
             {
                 width: 100px;
             }
-            
-        
-
-        
     </style>
-    
 </head>
 <body>
-   
     <div id="container">
-        <h1>Payment</h1>
-        <form action="" id="form">
-            <input type="number" placeholder="Enter Card Number">
-            <input type="number" placeholder="Ender CVV">
-            <input type="date" placeholder="Enter Exp Date">
-            <input type="text" placeholder="Enter Name">
+        <h1>Enter OTP</h1>
+        <form action="">
+            <input type="number" placeholder="OTP here!" id="otp">
             <input type="submit">
         </form>
     </div>
-  
 </body>
 <script>
-    document.querySelector("#form").addEventListener("submit",myfunction)
+    document.querySelector("form").addEventListener("submit",myfunction)
     function myfunction()
     {
         event.preventDefault();
-        alert("OTP sent to your registered mobile number");
-        window.location.href="otp.html"
+        var otp=document.querySelector("#otp").value;
+        if(otp=="1234")
+        {
+            alert("Payment Sucesseful")
+            window.location.href="index.html"
+        }
     }
 </script>
 </html>

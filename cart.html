@@ -53,6 +53,7 @@
     <h1>Im Cart</h1>
     <p id="total"></p>
     <p id="totalprice"></p>
+    <button id="payment">Buy</button>
     <form action="">
         <input type="text" id="code">
         <input type="submit">
@@ -112,6 +113,11 @@
       data.splice(index,1);
       localStorage.setItem("cartdata",JSON.stringify(data));
       window.location.reload()
+    }
+    document.querySelector("#payment").addEventListener("click",paymentpage)
+    function paymentpage()
+    {
+        window.location.href="payment.html"
     }
 </script>
 </html>

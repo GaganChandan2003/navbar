@@ -71,13 +71,19 @@
         <div><a href="signup.html">Sign Up</a></div>
         <div><a href="loginpage.html">Login</a></div>
     </div>
+    <select name="Sort" id="sort" onchange="sortitem()">
+      <option value="Sort">Sort</option>
+      <option value="lth">Low to High</option>
+      <option value="htl">High to Low</option>
+    </select>
     <h1>Womens Page</h1>
     <button><a href="cart.html">Cart</a></button>
     <div id="container"></div>
 </body>
 <script>
     
-    var womensData = [
+    
+  var womensData = [
     {
       image_url:
         "https://content.shop4reebok.com/static/Product-GL2296/reebok_GL2296_1.jpg.plp",
@@ -534,36 +540,72 @@
       strikedoffprice: 1899,
     },
   ];
-  womensData.map(function(el)
+  displayData(womensData);
+  function sortitem()
   {
-    var innerbox =document.createElement("div");
-    innerbox.setAttribute("id","innerbox")
-    var image1=document.createElement("img");
-    image1.src=el.image_url;
-    var name1=document.createElement("p");
-    name1.innerText=el.name;
-    var price1=document.createElement("p");
-    price1.innerText=el.price;
-    var strikedofprice=document.createElement("p");
-    strikedofprice.setAttribute("id","strike")
-    strikedofprice.innerText=el.strikedoffprice;
-    var pricesec =document.createElement("div");
-    pricesec.setAttribute("id","pricetag")
-    pricesec.append(price1,strikedofprice)
-    var addtocart=document.createElement("button");
-    addtocart.innerText="Add to Cart";
-    addtocart.addEventListener("click", function()
+    
+    var sortby=document.querySelector("#sort").value;
+    
+     if(sortby=="lth")
+     {
+        womensData.sort(function(a,b)
+       {
+         if(a.price>b.price) return 1
+         if(a.price<b.price) return -1
+         return 0
+         
+       })
+      displayData(womensData)
+     }
+     if(sortby=="htl")
+     {
+       womensData.sort(function(a,b)
+       {
+         if(a.price>b.price) return -1
+         if(a.price<b.price) return 1
+         return 0
+       })
+      displayData(womensData)
+     }
+     
+  }
+  
+  function displayData(womensData)
+  {
+    document.querySelector("#container").innerText=" ";
+    womensData.map(function(el)
     {
-       cart(el);
+      var innerbox =document.createElement("div");
+      innerbox.setAttribute("id","innerbox")
+      var image1=document.createElement("img");
+      image1.src=el.image_url;
+      var name1=document.createElement("p");
+      name1.innerText=el.name;
+      var price1=document.createElement("p");
+      price1.innerText=el.price;
+      var strikedofprice=document.createElement("p");
+      strikedofprice.setAttribute("id","strike")
+      strikedofprice.innerText=el.strikedoffprice;
+      var pricesec =document.createElement("div");
+      pricesec.setAttribute("id","pricetag")
+      pricesec.append(price1,strikedofprice)
+      var addtocart=document.createElement("button");
+      addtocart.innerText="Add to Cart";
+      addtocart.addEventListener("click", function()
+      {
+        cart(el);
+      })
+      innerbox.append(image1,name1,pricesec,addtocart);
+    document.querySelector("#container").append(innerbox);
     })
-    innerbox.append(image1,name1,pricesec,addtocart);
-   document.querySelector("#container").append(innerbox);
-  })
+  }
+  
   function cart(el)
   {
     var cart=JSON.parse(localStorage.getItem("cartdata"))||[];
     cart.push(el);
     localStorage.setItem("cartdata",JSON.stringify(cart))
+    window.location.href="cart.html"
   }
 </script>
 </html>
